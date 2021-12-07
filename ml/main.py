@@ -19,19 +19,21 @@ for files in dirs:
         image = Image.open(os.path.join(my_path, img)).convert('L')
         image = image.resize((28, 28), Image.ANTIALIAS)
         WIDTH, HEIGHT = image.size
-        data = list(image.getdata())
+        data = np.array(image.getdata())
+        # data = list(image.getdata())
         data = [data[offset:offset + WIDTH] for offset in range(0, WIDTH * HEIGHT, WIDTH)]
         x_array.append(data)
         y_array.append(files.lower())
 
-# print(x_array[1])
+x_array = np.asarray(x_array)
+y_array = np.asarray(y_array)
 x_train, x_test, y_train, y_test = train_test_split(x_array, y_array, test_size=0.25, random_state=42)
 
-print(x_train[0])
+# (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
 x_train = x_train / 255
 x_test = x_test / 255
-
+print(x_train[0])
 
 # y_train_cat = keras.utils.to_categorical(y_train, 10)
 # y_test_cat = keras.utils.to_categorical(y_test, 10)
