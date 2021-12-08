@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from tensorflow.keras.datasets import mnist         # библиотека базы выборок Mnist
+from tensorflow.keras.datasets import mnist
 from tensorflow import keras
 from tensorflow.keras.layers import Dense, Flatten, Conv2D, MaxPooling2D
 import cv2
@@ -63,21 +63,20 @@ model = keras.Sequential([
     Dense(33, activation='softmax')
 ])
 
-print(model.summary())      # вывод структуры НС в консоль
+print(model.summary())
 my_optimizer = keras.optimizers.Adam(learning_rate=0.001)
-# my_optimizer = keras.optimizers.SGD(learning_rate=0.0001, momentum=0.0, nesterov=True)
 model.compile(optimizer=my_optimizer, loss='categorical_crossentropy', metrics=['accuracy'])
 
-model.fit(x_train, y_train_cat, batch_size=40, epochs=8, validation_split=0.2)
+model.fit(x_train, y_train_cat, batch_size=30, epochs=8, validation_split=0.1)
 
 model.evaluate(x_test, y_test_cat)
 
-#
-# n = 1
+
+# n = 45
 # x = np.expand_dims(x_test[n], axis=0)
 # res = model.predict(x)
-# print( res )
-# print( np.argmax(res) )
+# print(res)
+# print(np.argmax(res))
 #
 # plt.imshow(x_test[n], cmap=plt.cm.binary)
 # plt.show()
@@ -90,8 +89,8 @@ model.evaluate(x_test, y_test_cat)
 #
 # print(pred[:20])
 # print(y_test[:20])
-#
-# # Выделение неверных вариантов
+# #
+# # # Выделение неверных вариантов
 # mask = pred == y_test
 # print(mask[:10])
 #
@@ -101,9 +100,9 @@ model.evaluate(x_test, y_test_cat)
 # print(x_false.shape)
 #
 # # Вывод первых 25 неверных результатов
-# plt.figure(figsize=(10,5))
+# plt.figure(figsize=(10, 5))
 # for i in range(25):
-#     plt.subplot(5,5,i+1)
+#     plt.subplot(5, 5, i+1)
 #     plt.xticks([])
 #     plt.yticks([])
 #     plt.imshow(x_false[i], cmap=plt.cm.binary)
