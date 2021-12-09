@@ -129,7 +129,6 @@ def main():
     for i in range(7):
         x = np.expand_dims(x_exam[i], axis=0)
         res = model.predict(x)
-        print(dirs[np.argmax(res)])
         file.write(str(dirs[np.argmax(res)]) + '\t')
 
     file.close()
