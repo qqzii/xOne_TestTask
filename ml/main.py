@@ -99,13 +99,15 @@ def main():
     x_exam = np.asarray(x_exam)
     x_exam = x_exam / 255
 
-    file = open('result.txt', 'w')
+    file = open('result.txt', 'w', encoding='utf-8')
 
     for i in range(7):
         x = np.expand_dims(x_exam[i], axis=0)
         res = model.predict(x)
         print(dirs[np.argmax(res)])
         file.write(str(dirs[np.argmax(res)]) + '\t')
+
+    file.close()
 
 
 if __name__ == '__main__':
